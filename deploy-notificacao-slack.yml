@@ -1,0 +1,14 @@
+  # Enviar notificação ao Slack com detalhes do repositório
+      - name: Notify Slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: "#seu-canal"
+          SLACK_USERNAME: "GitHub Actions Bot"
+          SLACK_ICON_EMOJI: ":rocket:"
+          SLACK_MESSAGE: |
+            *Deploy realizado com sucesso!*
+            Repositório: `${{ github.repository }}`
+            Branch: `${{ github.ref_name }}`
+            Commit: `${{ github.sha }}`
+            Mensagem do Commit: "${{ github.event.head_commit.message }}"
