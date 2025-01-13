@@ -7,8 +7,11 @@
           SLACK_USERNAME: "GitHub Actions Bot"
           SLACK_ICON_EMOJI: ":rocket:"
           SLACK_MESSAGE: |
-            *Deploy realizado com sucesso!*
-            Repositório: `${{ github.repository }}`
-            Branch: `${{ github.ref_name }}`
-            Commit: `${{ github.sha }}`
-            Mensagem do Commit: "${{ github.event.head_commit.message }}"
+            *Deploy ${{ job.status }}!* ${{ job.status == 'success' && ':white_check_mark:' || ':x:' }}
+            *Repositório:* `${{ github.repository }}`
+            *Branch:* `${{ github.ref_name }}`
+            *Commit:* `${{ github.sha }}`
+            *Mensagem do Commit:* "${{ github.event.head_commit.message }}"
+            *Autor do Commit:* `${{ github.event.head_commit.author.name }}`
+            *Data:* `${{ github.event.head_commit.timestamp }}`
+        if: always()
